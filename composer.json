@@ -1,0 +1,22 @@
+{
+    "name": "netsilik/session",
+    "description": "The Netsilik Session Handler.",
+    "keywords": ["sessions"],
+    "type": "library",
+    "license": "All Rights Reserved",
+	"homepage": "https://github.com/Netsilik/Session",
+    "authors": [
+        {
+            "name": "Jacco-V",
+            "role": "Developer",
+            "homepage": "http://netsilik.nl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^5.5.0 || ^7.0"
+    },
+    "autoload": {
+        "psr-4": { "Netsilik\\Session\\": "src/" }
+    }
+}
