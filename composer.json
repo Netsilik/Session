@@ -4,7 +4,7 @@
     "keywords": ["sessions"],
     "type": "library",
     "license": "proprietary",
-	"homepage": "https://github.com/Netsilik/Session",
+	"homepage": "https://gitlab.com/Netsilik/Session",
     "authors": [
         {
             "name": "Jacco-V",
@@ -12,7 +12,6 @@
             "homepage": "http://netsilik.nl"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": "^5.5.0 || ^7.0"
     },
