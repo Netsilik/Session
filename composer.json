@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "php": "^5.5.0 || ^7.0"
+        "php": "^7.3",
+        "netsilik/cookies": "^2.0"
     },
     "autoload": {
         "psr-4": { "Netsilik\\Session\\": "src/" }
