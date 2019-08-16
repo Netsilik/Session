@@ -13,9 +13,24 @@
         }
     ],
     "require": {
-        "php": "^5.5.0 || ^7.0"
-    },
+        "php": "^7.3",
+        
+        "netsilik/enum": "^2.0",
+        "netsilik/cookies": "^2.3"
+	},
+    "require-dev": {
+		"netsilik/base-test-case": "^0.9",
+		"netsilik/d": "^1.0",
+		"phpunit/phpunit": "^8.2"
+	},
     "autoload": {
-        "psr-4": { "Netsilik\\Session\\": "src/" }
-    }
+		"psr-4": {
+		    "Netsilik\\Session\\": "src/"
+		}
+    },
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	}
 }
