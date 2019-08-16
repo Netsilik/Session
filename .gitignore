@@ -1,1 +1,10 @@
-/vendor
+# PHPStorm settings
+/.idea/
+
+# Composer packages
+/vendor/
+
+# PhpUnit Cache and Reporting
+/report/
+/example/report
+/cache/
