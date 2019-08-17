@@ -3,7 +3,7 @@
     "description": "The Netsilik Session Handler.",
     "keywords": ["sessions"],
     "type": "library",
-    "license": "proprietary",
+    "license": "EUPL-1.1",
 	"homepage": "https://gitlab.com/Netsilik/Session",
     "authors": [
         {
