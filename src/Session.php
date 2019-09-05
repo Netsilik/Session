@@ -113,6 +113,8 @@ class Session implements iSession
 		ini_set('session.cache_limiter', null); // we will manage the cache control headers ourselfs, thank you
 		ini_set('session.cache_expire', floor($this->_timeTillReAuth / 60)); // in minutes
 		ini_set('session.gc_maxlifetime', $this->_timeToLive); // in seconds
+		ini_set('session.sid_length', 32); // length of the sessionId, in characters
+		ini_set('session.sid_bits_per_character', 4); // encode sessionId in 4 bits, using characters 0-9a-f
 		
 		// Setup initial state
 		$this->_state = new SessionState('none');
@@ -203,9 +205,9 @@ class Session implements iSession
 			return ($this->_state == 'ok' || $this->_state == 'recoverable'); // return the same return value as before
 		}
 		
-		if (!$this->_fetchSessionId()) { // No sessionId found
+		if (!$this->_sessionCookieExists()) { // No valid sessionId found in cookie
 			$this->_state = new SessionState('none');
-			$this->_stateCodes[] = 'continue::no sessionId found';
+			$this->_stateCodes[] = 'continue::no valid session cookie found';
 			
 			return false;
 		}
@@ -431,19 +433,17 @@ class Session implements iSession
 	}
 	
 	/**
-	 * Fetch the sessionId from either GET/POST or cookie
+	 * Check if a valid session cookie exists
 	 *
 	 * @return bool true when a sessionId has been found, false otherwise
 	 */
-	private function _fetchSessionId() : bool
+	private function _sessionCookieExists() : bool
 	{
 		if (null === ($sessionId = $this->_cookies->get($this->_cookieName))) {
 			return false;
 		}
 		
-		session_id($this->_sanitizeSessionId($sessionId));
-		
-		return true;
+		return ($sessionId === $this->_sanitizeSessionId($sessionId));
 	}
 	
 	/**
