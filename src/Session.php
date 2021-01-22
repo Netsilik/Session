@@ -18,11 +18,6 @@ use Netsilik\Session\Entities\SessionState;
 class Session implements iSession
 {
 	/**
-	 * The same-site policy for the session cookie
-	 */
-	const COOKIE_SAME_SITE = 'Lax';
-	
-	/**
 	 * @var \Netsilik\Cookies\Interfaces\iCookies $_cookies The Cookies class instance
 	 */
 	private $_cookies = null;
@@ -46,6 +41,11 @@ class Session implements iSession
 	 * @var bool $_cookieSecure Indicate whether or not the cookie should only be send back to the server over secured connections
 	 */
 	private $_cookieSecure;
+	
+	/**
+	 * @var string $_cookieSameSite
+	 */
+	private $_cookieSameSite = 'Lax';
 	
 	/**
 	 * @var string|null The contents of the Flash message
@@ -98,10 +98,11 @@ class Session implements iSession
 	{
 		$this->_cookies = $cookies;
 		
-		$this->_cookieName   = $config['cookie']['name'];
-		$this->_cookiePath   = $config['cookie']['path'];
-		$this->_cookieSecure = $config['cookie']['https'];
-		$this->_cookieDomain = $config['cookie']['domain'];
+		$this->_cookieName     = $config['cookie']['name'] ?: 'sid';
+		$this->_cookieDomain   = $config['cookie']['domain'];
+		$this->_cookiePath     = $config['cookie']['path'] ?: '/';
+		$this->_cookieSecure   = $config['cookie']['https'] ?: true;
+		$this->_cookieSameSite = $config['cookie']['sameSite'] ?: 'Lax';
 		
 		$this->_timeTillReAuth = $config['timeTillReAuth'] * 60; // convert to seconds
 		$this->_timeToLive     = $config['timeToLive'] * 60;     // convert to seconds
@@ -396,7 +397,7 @@ class Session implements iSession
 	 */
 	private function _setHeaders() : iSession
 	{
-		$this->_cookies->set($this->_cookieName, $this->_sessionId, null, $this->_cookiePath, $this->_cookieDomain, $this->_cookieSecure, true, self::COOKIE_SAME_SITE);
+		$this->_cookies->set($this->_cookieName, $this->_sessionId, null, $this->_cookiePath, $this->_cookieDomain, $this->_cookieSecure, true, $this->_cookieSameSite);
 		header('Cache-Control: "private, max-age=0, must-revalidate"', true);
 		header('Last-Modified: ' . date('D, d M Y H:i:s') . ' GMT', true);
 		
