@@ -13,13 +13,13 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^8.1",
         
         "netsilik/enum": "^2.0",
         "netsilik/cookies": "^2.3"
 	},
     "require-dev": {
-		"netsilik/base-test-case": "^0.9",
+		"netsilik/base-test-case": "^0.10",
 		"netsilik/d": "^1.0",
 		"phpunit/phpunit": "^8.2"
 	},
