@@ -98,11 +98,11 @@ class Session implements iSession
 	{
 		$this->_cookies = $cookies;
 		
-		$this->_cookieName     = $config['cookie']['name'] ?: 'sid';
+		$this->_cookieName     = $config['cookie']['name'] ?? 'sid';
 		$this->_cookieDomain   = $config['cookie']['domain'];
-		$this->_cookiePath     = $config['cookie']['path'] ?: '/';
-		$this->_cookieSecure   = $config['cookie']['https'] ?: true;
-		$this->_cookieSameSite = $config['cookie']['sameSite'] ?: 'Lax';
+		$this->_cookiePath     = $config['cookie']['path'] ?? '/';
+		$this->_cookieSecure   = $config['cookie']['https'] ?? true;
+		$this->_cookieSameSite = $config['cookie']['sameSite'] ?? 'Lax';
 		
 		$this->_timeTillReAuth = $config['timeTillReAuth'] * 60; // convert to seconds
 		$this->_timeToLive     = $config['timeToLive'] * 60;     // convert to seconds
